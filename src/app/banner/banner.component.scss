@@ -1,0 +1,10 @@
+@import '../app.component.scss';
+
+.banner {
+    height:$hauteur_titre;
+    background: lightblue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $largeur-banner;
+}

@@ -23,9 +23,13 @@ export class LectorComponent implements OnInit {
         "yellow",
         "red"
     ]);
-    lecteur.addRecord("/assets/audios/Casseurs Flowters - À l'heure où je me couche.mp3");
-    lecteur.addRecord("/assets/audios/Keny Arkana - La Mère Des Enfants Perdus.mp3");
-    lecteur.addRecord("/assets/audios/Générique - Arsène Lupin.mp3");
+    Lecteur.setVolumeColor([
+      "#A6FE52", // green
+      "#D4EA63", // kaki
+      "#FFF55F", // paleyellow
+      "#FEA056", // paleorange 
+      "#FF4E54" // red pale
+    ])
     lecteur.addRecord("/assets/audios/Z-Ryk - Brume d'antan.flac");
     lecteur.addRecord("/assets/audios/Z-Ryk - Compo.flac");
     lecteur.addRecord("/assets/audios/Z-Ryk - Maedievus.flac");
@@ -39,7 +43,6 @@ export class LectorComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    console.log("TEST :");
     console.log(this.lector);
   }
 }

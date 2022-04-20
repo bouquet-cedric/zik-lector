@@ -1,5 +1,5 @@
 @import '../app.component.scss';
-.zik-lector{
+.zik-lector {
     height: calc(100vmin - #{$hauteur_titre});
     top: $hauteur_titre;
     left: 0;
@@ -11,8 +11,8 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    background-color: burlywood;
 }
-
 
 .lector-titre {
     text-align: center;

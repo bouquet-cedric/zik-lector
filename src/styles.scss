@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+.frate_div>.rM:hover {
+    background-color: darkred!important;
+    color: black;
+}
+
+.frate_div>.rP:hover {
+    background-color: lightblue!important;
+    color: black;
+}
+
+.frate_div>* {
+    width: 50%!important;
+    height: 100%!important;
+    font-weight: bold;
+}
+
+.rVal {
+    background-color: black;
+    width: 100%!important;
+    text-align: center;
+}

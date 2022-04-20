@@ -1,10 +1,12 @@
 @import '../app.component.scss';
-
 .banner {
-    height:$hauteur_titre;
+    height: $hauteur_titre;
     background: lightblue;
     position: absolute;
     top: 0;
     left: 0;
     width: $largeur-banner;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

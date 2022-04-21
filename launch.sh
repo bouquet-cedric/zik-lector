@@ -2,29 +2,30 @@
 
 function msg(){
 	if [ $1 = 1 ];then
-		nbBefore=15
-		miniLine=""
-		for i in `seq 1 $nbBefore`;do
-			miniLine="$miniLine="
-		done
-		echo -e "$miniLine $2 $miniLine"
+		echo -e "> $2"
 		sizeT=$(expr length "$2")
 		shift
 		shift
-		if [ "$mode" = 'zen' ];then
+		if [ "$mode" = 'zen' -o "$mode" = 'log' ];then
 			$@ 2> bad.log > good.log
-			cat good.log
-			rm bad.log good.log 2> /dev/null
-		else
-			if [ "$mode" = 'log' ];then
-				$@
-			fi
 		fi
-		nbTirets=$(expr \( $nbBefore \* 2 \) + 2 + $sizeT)
-		for i in `seq 1 $nbTirets`;do
-			echo -ne "="
+		lines=$(cat good.log)
+		oldIFS=$IFS
+		IFS=$'\n'
+		for j in $(echo $lines);do
+			echo -e "@INFO $j"
 		done
-		echo -e ""
+		IFS=$oldIFS
+		rm bad.log good.log 2> /dev/null
+		if [ "$mode" = 'log' ];then
+			lines=$(cat bad.log)
+			oldIFS=$IFS
+			IFS=$'\n'
+			for j in $(echo $lines);do
+				echo -e "@WARN $j"
+			done
+			IFS=$oldIFS
+		fi
 	fi
 }
 
@@ -39,6 +40,17 @@ for i in $@;do
 	cpt=$(expr $cpt + 1)
 	if [ $i = "--prod" -o $i = "-p" ];then
 		prod=1
+	fi
+	if [ $i = "--exe" -o $i = "-e" ];then
+		prod=1
+		image=1
+		launch=1
+	fi
+	if [ $i = "--all" -o $i = "-a" ];then
+		list=1
+		prod=1
+		image=1
+		launch=1
 	fi
 	if [ $i = "--list" -o $i = "-ls" ];then
 		list=1
@@ -56,6 +68,8 @@ for i in $@;do
 		\r--build-image, -bi : create image docker
 		\r--mode <m>, -m <m> : specify the mode | 'zen' [default]/'log' = not display/display result command
 		\r--launch, -l       : launch app on nginx server
+		\r--exe, -e          : start needed components to launch application
+		\r--all, -a          : use all components, even those that are not needed
 		\r--help, -h         : print this help"
 	fi
 	if [ $i = "--mode" -o $i = "-m" ];then

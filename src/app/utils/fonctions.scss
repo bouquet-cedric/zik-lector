@@ -1,0 +1,4 @@
+@mixin dim($x, $y) {
+    width: $x;
+    height: $y;
+}

@@ -1,17 +1,16 @@
+@use "sass:map";
 @import '../app.component.scss';
 .zik-lector {
-    height: calc(100vmin - #{$hauteur_titre});
-    top: $hauteur_titre;
+    top: map.get($banner, "height");
     left: 0;
     position: absolute;
-    // border-right: 1px solid black;
-    width: $largeur-lector;
+    @include dim(map.get($lector, "width"), calc(100vmin - #{map.get($banner, "height")}));
     margin-top: 0;
     margin-left: 0;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: $bg-lector;
 }
 
 .lector-titre {
@@ -19,19 +18,17 @@
     position: fixed;
     align-items: center;
     justify-content: center;
-    // align-self: center;
     border-radius: 0 0 25px 0;
     display: flex;
     vertical-align: middle;
-    width: calc(#{$largeur-lector} * 95 / 100);
-    height: $hauteur_titre;
-    background-color: red;
+    @include dim(calc(#{map.get($lector, "width")} * 95 / 100), map.get($lector, "hauteur-titre"));
+    background-color: $bg-titre;
     margin-top: 0;
     margin-left: 0;
     z-index: 2;
 }
 
 #lector {
-    margin-top: $hauteur_titre !important;
+    margin-top: map.get($banner, "height") !important;
     z-index: 1;
 }

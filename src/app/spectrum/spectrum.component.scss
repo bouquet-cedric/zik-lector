@@ -1,0 +1,11 @@
+@use "sass:map";
+@import "../app.component.scss";
+.spectrum {
+    position: absolute;
+    display: flex;
+    left: map.get($lector, "width");
+    top: map.get($banner, "height");
+    @include dim(calc(100% - #{map.get($lector, "width")}), calc(100% - #{map.get($banner, "height")}));
+    background-color: $bg-spectrum;
+    color: white;
+}
